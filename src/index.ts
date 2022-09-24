@@ -7,4 +7,5 @@ export * from './NoneType';
 export * from './CustomType';
 export * from './ArrayType';
 export * from './DictType';
+export * from './UnionType';
 export * from './types';

@@ -6,6 +6,7 @@ import { DictType, DictTypeOptions } from './DictType';
 import { NoneType, NoneTypeOptions } from './NoneType';
 import { NumberType, NumberTypeOptions } from './NumberType';
 import { StringType, StringTypeOptions } from './StringType';
+import { UnionType, UnionTypeOptions } from './UnionType';
 
 /**
  * Type factories.
@@ -54,6 +55,12 @@ export namespace types {
         options?: Partial<DictTypeOptions>,
     ) => (
         new DictType(options)
+    );
+
+    export const union = (
+        options?: Partial<UnionTypeOptions>,
+    ) => (
+        new UnionType(options)
     );
 
 }
