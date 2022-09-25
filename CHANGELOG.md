@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+
+- Add `Specification`
+
 ## 0.3.0
 
 - Add `type.clone`
