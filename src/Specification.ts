@@ -96,6 +96,24 @@ export class Specification<DataType = unknown, PreviousDataType = unknown> {
     }
     /** dts2md break */
     /**
+     * Tells whether the versioned data is valid
+     * according to this specification.
+     */
+    test(versionedData: VersionedData<unknown>) {
+        const dataVersion = versionedData.version;
+        const specVersion = this.version;
+        if (dataVersion !== specVersion) {
+            return false;
+        }
+        const { validator } = this;
+        if (validator) {
+            return validator.test(versionedData.data);
+        } else {
+            return true;
+        }
+    }
+    /** dts2md break */
+    /**
      * Transform the data from an older version.
      * (And validate each version if `validateDuringTransform` is `true`.)
      */

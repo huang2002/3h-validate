@@ -22,9 +22,8 @@ exports.specTests = {
             version: 'v1',
             data: [0, 1],
         };
-        ctx.assertStrictEqual(
-            spec_1.validate(versionedData_1),
-            undefined,
+        ctx.assert(
+            spec_1.test(versionedData_1),
         );
         ctx.expectThrow(
             RangeError,
@@ -63,9 +62,8 @@ exports.specTests = {
             version: 'v1.1',
             data: [0, '1'],
         };
-        ctx.assertStrictEqual(
-            spec_1_1.validate(versionedData_1_1),
-            undefined,
+        ctx.assert(
+            spec_1_1.test(versionedData_1_1),
         );
 
         const spec_2 = new HV.Specification({
