@@ -9,3 +9,4 @@ export * from './ArrayType';
 export * from './DictType';
 export * from './UnionType';
 export * from './types';
+export * from './Specification';
