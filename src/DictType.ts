@@ -114,5 +114,22 @@ export class DictType extends Type<DictTypeOptions> {
         }
 
     }
+    /** dts2md break */
+    /**
+     * @override Type.clone
+     */
+    clone() {
+        const options = merge([this.options]);
+        if (options.pattern instanceof Type) {
+            options.pattern = options.pattern.clone();
+        } else {
+            const pattern = merge([options.pattern]);
+            options.pattern = pattern;
+            for (const key in pattern) {
+                pattern[key] = pattern[key].clone();
+            }
+        }
+        return new DictType(options);
+    }
 
 }

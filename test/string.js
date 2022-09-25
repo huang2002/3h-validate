@@ -119,4 +119,15 @@ exports.stringTests = {
         );
     },
 
+    string_clone(ctx) {
+        const source = HV.types.string({
+            maxLength: 10,
+        });
+        const copy = source.clone();
+        ctx.assert(copy !== source);
+        ctx.assert(copy instanceof HV.StringType);
+        ctx.assert(copy.options !== source.options);
+        ctx.assert(copy.options.maxLength === 10);
+    },
+
 };

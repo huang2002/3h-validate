@@ -60,4 +60,15 @@ exports.noneTests = {
         );
     },
 
+    none_clone(ctx) {
+        const source = HV.types.none({
+            acceptUndefined: false,
+        });
+        const copy = source.clone();
+        ctx.assert(copy !== source);
+        ctx.assert(copy instanceof HV.NoneType);
+        ctx.assert(copy.options !== source.options);
+        ctx.assert(!copy.options.acceptUndefined);
+    },
+
 };

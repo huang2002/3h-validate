@@ -41,4 +41,15 @@ exports.customTests = {
         );
     },
 
+    custom_clone(ctx) {
+        const source = HV.types.custom({
+            validate: (v) => { },
+        });
+        const copy = source.clone();
+        ctx.assert(copy !== source);
+        ctx.assert(copy instanceof HV.CustomType);
+        ctx.assert(copy.options !== source.options);
+        ctx.assert(copy.options.validate === source.options.validate);
+    },
+
 };

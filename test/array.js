@@ -175,4 +175,30 @@ exports.arrayTests = {
         );
     },
 
+    array_clone(ctx) {
+        const source1 = HV.types.array({
+            pattern: HV.types.number(),
+        });
+        const copy1 = source1.clone();
+        ctx.assert(copy1 !== source1);
+        ctx.assert(copy1 instanceof HV.ArrayType);
+        ctx.assert(copy1.options !== source1.options);
+        ctx.assert(copy1.options.pattern !== source1.options.pattern);
+        ctx.assert(copy1.options.pattern instanceof HV.NumberType);
+        const source2 = HV.types.array({
+            pattern: [
+                HV.types.number(),
+                HV.types.string(),
+            ],
+        });
+        const copy2 = source2.clone();
+        ctx.assert(copy2 !== source2);
+        ctx.assert(copy2 instanceof HV.ArrayType);
+        ctx.assert(copy2.options !== source2.options);
+        ctx.assert(Array.isArray(copy2.options.pattern));
+        ctx.assert(copy2.options.pattern !== source2.options.pattern);
+        ctx.assert(copy2.options.pattern[0] instanceof HV.NumberType);
+        ctx.assert(copy2.options.pattern[1] instanceof HV.StringType);
+    },
+
 };

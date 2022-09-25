@@ -25,5 +25,12 @@ export class BooleanType extends Type<{}> {
             throw new TypeError('expect a boolean');
         }
     }
+    /** dts2md break */
+    /**
+     * @override Type.clone
+     */
+    clone() {
+        return new BooleanType();
+    }
 
 }

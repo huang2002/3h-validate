@@ -77,5 +77,12 @@ export class StringType extends Type<StringTypeOptions> {
             throw new RangeError('the string is too long');
         }
     }
+    /** dts2md break */
+    /**
+     * @override Type.clone
+     */
+    clone() {
+        return new StringType(merge([this.options]));
+    }
 
 }

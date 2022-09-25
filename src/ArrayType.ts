@@ -101,5 +101,20 @@ export class ArrayType extends Type<ArrayTypeOptions> {
         }
 
     }
+    /** dts2md break */
+    /**
+     * @override Type.clone
+     */
+    clone() {
+        const options = merge([this.options]);
+        if (Array.isArray(options.pattern)) {
+            options.pattern = options.pattern.map(
+                (validator) => validator.clone()
+            );
+        } else {
+            options.pattern = options.pattern.clone();
+        }
+        return new ArrayType(options);
+    }
 
 }

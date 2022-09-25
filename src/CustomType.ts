@@ -37,5 +37,12 @@ export class CustomType extends Type<CustomTypeOptions> {
     validate(value: unknown) {
         this.options.validate(value);
     }
+    /** dts2md break */
+    /**
+     * @override Type.clone
+     */
+    clone() {
+        return new CustomType(merge([this.options]));
+    }
 
 }

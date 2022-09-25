@@ -22,6 +22,11 @@ export abstract class Type<OptionsType extends {} = {}> {
     abstract validate(value: unknown): void;
     /** dts2md break */
     /**
+     * Create a new validator from this one.
+     */
+    abstract clone(): Type<OptionsType>;
+    /** dts2md break */
+    /**
      * Tells whether the given value is valid.
      * (Using {@link validate} internally.)
      */

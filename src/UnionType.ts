@@ -47,5 +47,18 @@ export class UnionType extends Type<UnionTypeOptions> {
         }
         throw new TypeError('the value is rejected by all validators');
     }
+    /** dts2md break */
+    /**
+     * @override Type.clone
+     */
+    clone() {
+        const options = merge([this.options]);
+        if (Array.isArray(options.validators)) {
+            options.validators = options.validators.map(
+                (validator) => validator.clone()
+            );
+        }
+        return new UnionType(options);
+    }
 
 }

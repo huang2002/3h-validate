@@ -26,4 +26,11 @@ exports.booleanTests = {
         );
     },
 
+    boolean_clone(ctx) {
+        const source = HV.types.boolean();
+        const copy = source.clone();
+        ctx.assert(copy instanceof HV.BooleanType);
+        ctx.assert(copy !== source);
+    },
+
 };

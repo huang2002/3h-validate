@@ -84,5 +84,12 @@ export class NumberType extends Type<NumberTypeOptions> {
             throw new RangeError('the number is too big');
         }
     }
+    /** dts2md break */
+    /**
+     * @override Type.clone
+     */
+    clone() {
+        return new NumberType(merge([this.options]));
+    }
 
 }

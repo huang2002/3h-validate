@@ -52,5 +52,12 @@ export class NoneType extends Type<NoneTypeOptions> {
             throw new RangeError('undefined is not acceptable');
         }
     }
+    /** dts2md break */
+    /**
+     * @override Type.clone
+     */
+    clone() {
+        return new NoneType(merge([this.options]));
+    }
 
 }

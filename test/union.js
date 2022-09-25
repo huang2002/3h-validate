@@ -31,4 +31,17 @@ exports.unionTests = {
         );
     },
 
+    union_clone(ctx) {
+        const source = HV.types.union({
+            validators: [HV.types.number()],
+        });
+        const copy = source.clone();
+        ctx.assert(copy !== source);
+        ctx.assert(copy instanceof HV.UnionType);
+        ctx.assert(copy.options !== source.options);
+        ctx.assert(copy.options.validators !== source.options.validators);
+        ctx.assert(Array.isArray(copy.options.validators));
+        ctx.assert(copy.options.validators[0] instanceof HV.NumberType);
+    },
+
 };

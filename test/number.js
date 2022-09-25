@@ -200,4 +200,15 @@ exports.numberTests = {
         );
     },
 
+    number_clone(ctx) {
+        const source = HV.types.number({
+            min: 0,
+        });
+        const copy = source.clone();
+        ctx.assert(copy !== source);
+        ctx.assert(copy instanceof HV.NumberType);
+        ctx.assert(copy.options !== source.options);
+        ctx.assert(copy.options.min === 0);
+    },
+
 };

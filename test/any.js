@@ -20,4 +20,11 @@ exports.anyTests = {
         ctx.assert(validator.test([]));
     },
 
+    any_clone(ctx) {
+        const source = HV.types.any();
+        const copy = source.clone();
+        ctx.assert(copy instanceof HV.AnyType);
+        ctx.assert(copy !== source);
+    },
+
 };

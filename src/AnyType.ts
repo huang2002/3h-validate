@@ -23,5 +23,12 @@ export class AnyType extends Type<{}> {
     validate(value: unknown) {
         // pass
     }
+    /** dts2md break */
+    /**
+     * @override Type.clone
+     */
+    clone() {
+        return new AnyType();
+    }
 
 }
