@@ -1,13 +1,13 @@
 import babel from "@rollup/plugin-babel";
+import nodeResolve from "@rollup/plugin-node-resolve";
 
 const input = './js/index.js';
-const external = ['3h-utils'];
 
 export default [
     {
         input,
-        external,
         plugins: [
+            nodeResolve(),
             babel({
                 babelHelpers: 'bundled',
                 presets: [
@@ -21,14 +21,13 @@ export default [
             format: 'umd',
             name: 'HV',
             file: './dist/3h-validate.umd.js',
-            globals: {
-                '3h-utils': 'HUtils',
-            },
         },
     },
     {
         input,
-        external,
+        plugins: [
+            nodeResolve(),
+        ],
         output: {
             format: 'esm',
             file: './dist/3h-validate.js',
