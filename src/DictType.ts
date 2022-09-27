@@ -1,4 +1,4 @@
-import { merge } from '3h-utils';
+import { isDict, merge } from '3h-utils';
 import { AnyType } from './AnyType';
 import { Type } from './Type';
 
@@ -70,12 +70,12 @@ export class DictType extends Type<DictTypeOptions> {
      */
     validate(value: unknown) {
 
-        if (Object.prototype.toString.call(value) !== '[object Object]') {
+        if (!isDict(value)) {
             throw new TypeError('expect a dict');
         }
 
         const { options } = this;
-        const keys = Object.keys(value as object);
+        const keys = Object.keys(value);
         const size = keys.length;
 
         if (
@@ -96,12 +96,12 @@ export class DictType extends Type<DictTypeOptions> {
         if (pattern) {
             if (pattern instanceof Type) {
                 keys.forEach((key) => {
-                    pattern.validate((value as any)[key]);
+                    pattern.validate(value[key]);
                 });
             } else {
                 const patternKeys = Object.keys(pattern);
                 patternKeys.forEach((key) => {
-                    (pattern as any)[key].validate((value as any)[key]);
+                    pattern[key].validate(value[key]);
                 });
                 if (!options.extensible) {
                     keys.forEach((key) => {

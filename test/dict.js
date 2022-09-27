@@ -198,6 +198,7 @@ exports.dictTests = {
     },
 
     dict_clone(ctx) {
+        const { isDict } = require('3h-utils');
         const source1 = HV.types.dict({
             pattern: HV.types.number(),
         });
@@ -217,7 +218,7 @@ exports.dictTests = {
         ctx.assert(copy2 !== source2);
         ctx.assert(copy2 instanceof HV.DictType);
         ctx.assert(copy2.options !== source2.options);
-        ctx.assert(Object.prototype.toString.call(copy2.options.pattern) === '[object Object]');
+        ctx.assert(isDict(copy2.options.pattern));
         ctx.assert(copy2.options.pattern !== source2.options.pattern);
         ctx.assert(copy2.options.pattern['x'] instanceof HV.NumberType);
         ctx.assert(copy2.options.pattern['s'] instanceof HV.StringType);
