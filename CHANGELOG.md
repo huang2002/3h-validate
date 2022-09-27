@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1
+
+- Update `3h-utils`
+
 ## 0.5.0
 
 - Bundle `3h-utils`
