@@ -10,7 +10,7 @@
 
 ## Examples
 
-## Type Validation
+### Type Validation
 
 ```js
 import { types } from '3h-validate';
