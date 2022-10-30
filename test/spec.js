@@ -118,4 +118,41 @@ exports.specTests = {
         );
     },
 
+    spec_recursive(ctx) {
+        const spec1_1 = new HV.Specification({
+            version: '1.1',
+            validator: types.number(),
+        });
+        const spec1_2 = new HV.Specification({
+            version: '1.2',
+            previousSpecification: spec1_1,
+            validator: types.boolean(),
+            updater: Boolean,
+        });
+        const spec2 = new HV.Specification({
+            version: '2',
+            validator: types.dict({
+                pattern: {
+                    data: spec1_2,
+                },
+            }),
+        });
+        ctx.assert(
+            spec2.test({
+                version: '2',
+                data: {
+                    data: { version: '1.2', data: true },
+                },
+            })
+        );
+        ctx.assert(
+            !spec2.test({
+                version: '2',
+                data: {
+                    data: { version: '1.1', data: 1 },
+                },
+            })
+        );
+    },
+
 };
