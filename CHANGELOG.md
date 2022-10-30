@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.0
+
+- Make `Specification` itself a type
+
 ## 0.5.1
 
 - Update `3h-utils`
