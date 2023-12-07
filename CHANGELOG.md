@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.0
+
+- Improve error messages.
+
 ## 0.6.0
 
 - Make `Specification` itself a type
