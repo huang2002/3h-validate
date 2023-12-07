@@ -60,16 +60,13 @@ export class DictType extends Type<DictTypeOptions> {
      * Constructor of {@link DictType}.
      */
     constructor(options?: Partial<DictTypeOptions>) {
-        super(
-            merge([DictType.defaultOptions, options])
-        );
+        super(merge([DictType.defaultOptions, options]));
     }
     /** dts2md break */
     /**
      * @override Type.validate
      */
     validate(value: unknown) {
-
         if (!isDict(value)) {
             throw new TypeError('expect a dict');
         }
@@ -79,15 +76,15 @@ export class DictType extends Type<DictTypeOptions> {
         const size = keys.length;
 
         if (
-            (size < options.minSize)
-            || (!options.includeMin && (size === options.minSize))
+            size < options.minSize ||
+            (!options.includeMin && size === options.minSize)
         ) {
             throw new RangeError('too few entries');
         }
 
         if (
-            (size > options.maxSize)
-            || (!options.includeMax && (size === options.maxSize))
+            size > options.maxSize ||
+            (!options.includeMax && size === options.maxSize)
         ) {
             throw new RangeError('too many entries');
         }
@@ -96,12 +93,34 @@ export class DictType extends Type<DictTypeOptions> {
         if (pattern) {
             if (pattern instanceof Type) {
                 keys.forEach((key) => {
-                    pattern.validate(value[key]);
+                    try {
+                        pattern.validate(value[key]);
+                    } catch (error) {
+                        if (error instanceof Error) {
+                            throw new TypeError(
+                                `property "${key}" is invalid: ${error.message}`,
+                                { cause: error },
+                            );
+                        } else {
+                            throw error;
+                        }
+                    }
                 });
             } else {
                 const patternKeys = Object.keys(pattern);
                 patternKeys.forEach((key) => {
-                    pattern[key].validate(value[key]);
+                    try {
+                        pattern[key].validate(value[key]);
+                    } catch (error) {
+                        if (error instanceof Error) {
+                            throw new TypeError(
+                                `property "${key}" is invalid: ${error.message}`,
+                                { cause: error },
+                            );
+                        } else {
+                            throw error;
+                        }
+                    }
                 });
                 if (!options.extensible) {
                     keys.forEach((key) => {
@@ -112,7 +131,6 @@ export class DictType extends Type<DictTypeOptions> {
                 }
             }
         }
-
     }
     /** dts2md break */
     /**
@@ -131,5 +149,4 @@ export class DictType extends Type<DictTypeOptions> {
         }
         return new DictType(options);
     }
-
 }

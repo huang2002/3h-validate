@@ -51,16 +51,13 @@ export class ArrayType extends Type<ArrayTypeOptions> {
      * Constructor of {@link ArrayType}.
      */
     constructor(options?: Partial<ArrayTypeOptions>) {
-        super(
-            merge([ArrayType.defaultOptions, options])
-        );
+        super(merge([ArrayType.defaultOptions, options]));
     }
     /** dts2md break */
     /**
      * @override Type.validate
      */
     validate(value: unknown) {
-
         if (!Array.isArray(value)) {
             throw new TypeError('expect an array');
         }
@@ -69,15 +66,15 @@ export class ArrayType extends Type<ArrayTypeOptions> {
         const { length } = value;
 
         if (
-            (length < options.minLength)
-            || (!options.includeMin && (length === options.minLength))
+            length < options.minLength ||
+            (!options.includeMin && length === options.minLength)
         ) {
             throw new RangeError('the array is too short');
         }
 
         if (
-            (length > options.maxLength)
-            || (!options.includeMax && (length === options.maxLength))
+            length > options.maxLength ||
+            (!options.includeMax && length === options.maxLength)
         ) {
             throw new RangeError('the array is too long');
         }
@@ -87,19 +84,40 @@ export class ArrayType extends Type<ArrayTypeOptions> {
             if (Array.isArray(pattern)) {
                 if (length !== pattern.length) {
                     throw new RangeError(
-                        'the length of the array does not match the pattern'
+                        'the length of the array does not match the pattern',
                     );
                 }
                 for (let i = 0; i < length; i++) {
-                    pattern[i].validate(value[i]);
+                    try {
+                        pattern[i].validate(value[i]);
+                    } catch (error) {
+                        if (error instanceof Error) {
+                            throw new TypeError(
+                                `element#${i} is invalid: ${error.message}`,
+                                { cause: error },
+                            );
+                        } else {
+                            throw error;
+                        }
+                    }
                 }
             } else {
                 for (let i = 0; i < length; i++) {
-                    pattern.validate(value[i]);
+                    try {
+                        pattern.validate(value[i]);
+                    } catch (error) {
+                        if (error instanceof Error) {
+                            throw new TypeError(
+                                `element#${i} is invalid: ${error.message}`,
+                                { cause: error },
+                            );
+                        } else {
+                            throw error;
+                        }
+                    }
                 }
             }
         }
-
     }
     /** dts2md break */
     /**
@@ -108,13 +126,12 @@ export class ArrayType extends Type<ArrayTypeOptions> {
     clone() {
         const options = merge([this.options]);
         if (Array.isArray(options.pattern)) {
-            options.pattern = options.pattern.map(
-                (validator) => validator.clone()
+            options.pattern = options.pattern.map((validator) =>
+                validator.clone(),
             );
         } else {
             options.pattern = options.pattern.clone();
         }
         return new ArrayType(options);
     }
-
 }

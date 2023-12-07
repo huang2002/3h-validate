@@ -1,6 +1,6 @@
 // @ts-check
-const HV = /** @type {import('..')} */(
-    /** @type {unknown} */(require('../dist/3h-validate.umd.js'))
+const HV = /** @type {import('..')} */ (
+    /** @type {unknown} */ (require('../dist/3h-validate.umd.js'))
 );
 
 const { types } = HV;
@@ -9,9 +9,7 @@ const { types } = HV;
  * @type {import('3h-test').TestCases}
  */
 exports.specTests = {
-
     spec_default(ctx) {
-
         const spec_1 = new HV.Specification({
             version: 'v1',
             validator: types.array({
@@ -22,9 +20,7 @@ exports.specTests = {
             version: 'v1',
             data: [0, 1],
         };
-        ctx.assert(
-            spec_1.test(versionedData_1),
-        );
+        ctx.assert(spec_1.test(versionedData_1));
         ctx.expectThrow(
             RangeError,
             spec_1.validate,
@@ -32,11 +28,11 @@ exports.specTests = {
             spec_1,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {RangeError} */(error).message,
-                    'cannot validate data of a different version'
-                    + ' (expected "v1" but got "foo")'
+                    /** @type {RangeError} */ (error).message,
+                    'cannot validate data of a different version' +
+                        ' (expected "v1" but got "foo")',
                 );
-            }
+            },
         );
         ctx.expectThrow(
             TypeError,
@@ -45,10 +41,10 @@ exports.specTests = {
             spec_1,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {TypeError} */(error).message,
-                    'expect a number'
+                    /** @type {TypeError} */ (error).message,
+                    'element#0 is invalid: expect a number',
                 );
-            }
+            },
         );
 
         const spec_1_1 = new HV.Specification({
@@ -62,25 +58,20 @@ exports.specTests = {
             version: 'v1.1',
             data: [0, '1'],
         };
-        ctx.assert(
-            spec_1_1.test(versionedData_1_1),
-        );
+        ctx.assert(spec_1_1.test(versionedData_1_1));
 
         const spec_2 = new HV.Specification({
             version: 'v2',
             previousSpecification: spec_1_1,
             validator: types.string(),
             updater(data) {
-                return /** @type {unknown[]} */(data).join(',');
-            }
-        });
-        ctx.assertDeepEqual(
-            spec_2.transform(versionedData_1),
-            {
-                version: 'v2',
-                data: versionedData_1.data.join(','),
+                return /** @type {unknown[]} */ (data).join(',');
             },
-        );
+        });
+        ctx.assertDeepEqual(spec_2.transform(versionedData_1), {
+            version: 'v2',
+            data: versionedData_1.data.join(','),
+        });
         ctx.expectThrow(
             RangeError,
             spec_2.validate,
@@ -88,13 +79,12 @@ exports.specTests = {
             spec_2,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {RangeError} */(error).message,
-                    'cannot validate data of a different version'
-                    + ' (expected "v2" but got "v1")'
+                    /** @type {RangeError} */ (error).message,
+                    'cannot validate data of a different version' +
+                        ' (expected "v2" but got "v1")',
                 );
-            }
+            },
         );
-
     },
 
     spec_validateDuringTransform(ctx) {
@@ -112,10 +102,10 @@ exports.specTests = {
             version: '1',
             data: 'blahblah',
         };
-        ctx.assertDeepEqual(
-            spec2.transform(versionedData1),
-            { version: '2', data: true },
-        );
+        ctx.assertDeepEqual(spec2.transform(versionedData1), {
+            version: '2',
+            data: true,
+        });
     },
 
     spec_recursive(ctx) {
@@ -143,7 +133,7 @@ exports.specTests = {
                 data: {
                     data: { version: '1.2', data: true },
                 },
-            })
+            }),
         );
         ctx.assert(
             !spec2.test({
@@ -151,8 +141,7 @@ exports.specTests = {
                 data: {
                     data: { version: '1.1', data: 1 },
                 },
-            })
+            }),
         );
     },
-
 };

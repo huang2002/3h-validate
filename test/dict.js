@@ -1,13 +1,12 @@
 // @ts-check
-const HV = /** @type {import('..')} */(
-    /** @type {unknown} */(require('../dist/3h-validate.umd.js'))
+const HV = /** @type {import('..')} */ (
+    /** @type {unknown} */ (require('../dist/3h-validate.umd.js'))
 );
 
 /**
  * @type {import('3h-test').TestCases}
  */
 exports.dictTests = {
-
     dict_default(ctx) {
         const validator = HV.types.dict();
         ctx.assert(validator.test({ x: 0 }));
@@ -19,7 +18,7 @@ exports.dictTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {TypeError} */(error).message,
+                    /** @type {TypeError} */ (error).message,
                     'expect a dict',
                 );
             },
@@ -39,8 +38,8 @@ exports.dictTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {TypeError} */(error).message,
-                    'expect a number',
+                    /** @type {TypeError} */ (error).message,
+                    'property "foo" is invalid: expect a number',
                 );
             },
         );
@@ -60,8 +59,8 @@ exports.dictTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {TypeError} */(error).message,
-                    'expect a number',
+                    /** @type {TypeError} */ (error).message,
+                    'property "x" is invalid: expect a number',
                 );
             },
         );
@@ -72,8 +71,8 @@ exports.dictTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {TypeError} */(error).message,
-                    'expect a string',
+                    /** @type {TypeError} */ (error).message,
+                    'property "s" is invalid: expect a string',
                 );
             },
         );
@@ -84,7 +83,7 @@ exports.dictTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {RangeError} */(error).message,
+                    /** @type {RangeError} */ (error).message,
                     'unexpected key: y',
                 );
             },
@@ -106,8 +105,8 @@ exports.dictTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {TypeError} */(error).message,
-                    'expect a number',
+                    /** @type {TypeError} */ (error).message,
+                    'property "x" is invalid: expect a number',
                 );
             },
         );
@@ -118,8 +117,8 @@ exports.dictTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {TypeError} */(error).message,
-                    'expect a string',
+                    /** @type {TypeError} */ (error).message,
+                    'property "s" is invalid: expect a string',
                 );
             },
         );
@@ -136,7 +135,7 @@ exports.dictTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {RangeError} */(error).message,
+                    /** @type {RangeError} */ (error).message,
                     'too few entries',
                 );
             },
@@ -154,7 +153,7 @@ exports.dictTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {RangeError} */(error).message,
+                    /** @type {RangeError} */ (error).message,
                     'too many entries',
                 );
             },
@@ -172,7 +171,7 @@ exports.dictTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {RangeError} */(error).message,
+                    /** @type {RangeError} */ (error).message,
                     'too few entries',
                 );
             },
@@ -190,7 +189,7 @@ exports.dictTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {RangeError} */(error).message,
+                    /** @type {RangeError} */ (error).message,
                     'too many entries',
                 );
             },
@@ -223,5 +222,4 @@ exports.dictTests = {
         ctx.assert(copy2.options.pattern['x'] instanceof HV.NumberType);
         ctx.assert(copy2.options.pattern['s'] instanceof HV.StringType);
     },
-
 };

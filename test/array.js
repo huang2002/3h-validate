@@ -1,13 +1,12 @@
 // @ts-check
-const HV = /** @type {import('..')} */(
-    /** @type {unknown} */(require('../dist/3h-validate.umd.js'))
+const HV = /** @type {import('..')} */ (
+    /** @type {unknown} */ (require('../dist/3h-validate.umd.js'))
 );
 
 /**
  * @type {import('3h-test').TestCases}
  */
 exports.arrayTests = {
-
     array_default(ctx) {
         const validator = HV.types.array();
         ctx.assert(validator.test(['foo']));
@@ -19,7 +18,7 @@ exports.arrayTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {TypeError} */(error).message,
+                    /** @type {TypeError} */ (error).message,
                     'expect an array',
                 );
             },
@@ -39,18 +38,15 @@ exports.arrayTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {TypeError} */(error).message,
-                    'expect a number',
+                    /** @type {TypeError} */ (error).message,
+                    'element#0 is invalid: expect a number',
                 );
             },
         );
     },
 
     array_pattern_multiple(ctx) {
-        const pattern = [
-            HV.types.number(),
-            HV.types.string(),
-        ];
+        const pattern = [HV.types.number(), HV.types.string()];
         const validator = HV.types.array({ pattern });
         ctx.assert(validator.test([0, '1']));
         ctx.expectThrow(
@@ -60,8 +56,8 @@ exports.arrayTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {TypeError} */(error).message,
-                    'expect a number',
+                    /** @type {TypeError} */ (error).message,
+                    'element#0 is invalid: expect a number',
                 );
             },
         );
@@ -72,8 +68,8 @@ exports.arrayTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {TypeError} */(error).message,
-                    'expect a string',
+                    /** @type {TypeError} */ (error).message,
+                    'element#1 is invalid: expect a string',
                 );
             },
         );
@@ -84,7 +80,7 @@ exports.arrayTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {RangeError} */(error).message,
+                    /** @type {RangeError} */ (error).message,
                     'the length of the array does not match the pattern',
                 );
             },
@@ -96,7 +92,7 @@ exports.arrayTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {RangeError} */(error).message,
+                    /** @type {RangeError} */ (error).message,
                     'the length of the array does not match the pattern',
                 );
             },
@@ -114,7 +110,7 @@ exports.arrayTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {RangeError} */(error).message,
+                    /** @type {RangeError} */ (error).message,
                     'the array is too short',
                 );
             },
@@ -132,7 +128,7 @@ exports.arrayTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {RangeError} */(error).message,
+                    /** @type {RangeError} */ (error).message,
                     'the array is too long',
                 );
             },
@@ -150,7 +146,7 @@ exports.arrayTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {RangeError} */(error).message,
+                    /** @type {RangeError} */ (error).message,
                     'the array is too short',
                 );
             },
@@ -168,7 +164,7 @@ exports.arrayTests = {
             validator,
             (error) => {
                 ctx.assertStrictEqual(
-                    /** @type {RangeError} */(error).message,
+                    /** @type {RangeError} */ (error).message,
                     'the array is too long',
                 );
             },
@@ -186,10 +182,7 @@ exports.arrayTests = {
         ctx.assert(copy1.options.pattern !== source1.options.pattern);
         ctx.assert(copy1.options.pattern instanceof HV.NumberType);
         const source2 = HV.types.array({
-            pattern: [
-                HV.types.number(),
-                HV.types.string(),
-            ],
+            pattern: [HV.types.number(), HV.types.string()],
         });
         const copy2 = source2.clone();
         ctx.assert(copy2 !== source2);
@@ -200,5 +193,4 @@ exports.arrayTests = {
         ctx.assert(copy2.options.pattern[0] instanceof HV.NumberType);
         ctx.assert(copy2.options.pattern[1] instanceof HV.StringType);
     },
-
 };
