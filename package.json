@@ -6,6 +6,7 @@
     "main": "./dist/3h-validate.umd.min.js",
     "type": "commonjs",
     "exports": {
+        "types": "./index.d.ts",
         "node": {
             "import": "./dist/3h-validate.mjs",
             "default": "./dist/3h-validate.umd.js"
