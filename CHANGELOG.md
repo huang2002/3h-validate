@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.0
+
+- Add `exports` to `package.json`.
+
 ## 0.7.1
 
 - Add `type` to `package.json`.
