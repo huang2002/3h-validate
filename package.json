@@ -2,16 +2,16 @@
     "name": "3h-validate",
     "version": "0.8.0",
     "description": "A runtime validator.",
-    "module": "./dist/3h-validate.min.js",
+    "module": "./dist/3h-validate.min.mjs",
     "main": "./dist/3h-validate.umd.min.js",
     "type": "commonjs",
     "exports": {
         "node": {
-            "import": "./dist/3h-validate.js",
+            "import": "./dist/3h-validate.mjs",
             "default": "./dist/3h-validate.umd.js"
         },
         "default": {
-            "import": "./dist/3h-validate.min.js",
+            "import": "./dist/3h-validate.min.mjs",
             "default": "./dist/3h-validate.umd.min.js"
         }
     },
@@ -21,7 +21,7 @@
     "scripts": {
         "prebuild": "tsc",
         "build": "rollup -c",
-        "postbuild": "terser dist/3h-validate.js --config-file terser.json --module -o dist/3h-validate.min.js && terser dist/3h-validate.umd.js --config-file terser.json -o dist/3h-validate.umd.min.js && node stat",
+        "postbuild": "terser dist/3h-validate.mjs --config-file terser.json --module -o dist/3h-validate.min.mjs && terser dist/3h-validate.umd.js --config-file terser.json -o dist/3h-validate.umd.min.js && node stat",
         "test": "node ./test/index.js",
         "docs": "dts2md \"**\" \"!index.d.ts\" -i ./types -o ./docs -l -I Home.md"
     },

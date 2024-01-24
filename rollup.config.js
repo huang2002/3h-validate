@@ -1,5 +1,5 @@
-import babel from "@rollup/plugin-babel";
-import nodeResolve from "@rollup/plugin-node-resolve";
+import babel from '@rollup/plugin-babel';
+import nodeResolve from '@rollup/plugin-node-resolve';
 
 const input = './js/index.js';
 
@@ -11,9 +11,12 @@ export default [
             babel({
                 babelHelpers: 'bundled',
                 presets: [
-                    ['@babel/preset-env', {
-                        loose: true,
-                    }],
+                    [
+                        '@babel/preset-env',
+                        {
+                            loose: true,
+                        },
+                    ],
                 ],
             }),
         ],
@@ -25,12 +28,10 @@ export default [
     },
     {
         input,
-        plugins: [
-            nodeResolve(),
-        ],
+        plugins: [nodeResolve()],
         output: {
             format: 'esm',
-            file: './dist/3h-validate.js',
+            file: './dist/3h-validate.mjs',
         },
     },
 ];
