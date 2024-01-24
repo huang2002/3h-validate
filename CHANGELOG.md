@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.2
+
+- Fix typing export.
+
 ## 0.8.1
 
 - Update dist file extensions.
