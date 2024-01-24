@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.1
+
+- Update dist file extensions.
+
 ## 0.8.0
 
 - Add `exports` to `package.json`.
