@@ -1,6 +1,6 @@
 {
     "name": "3h-validate",
-    "version": "0.8.1",
+    "version": "0.8.2",
     "description": "A runtime validator.",
     "module": "./dist/3h-validate.min.mjs",
     "main": "./dist/3h-validate.umd.min.js",
